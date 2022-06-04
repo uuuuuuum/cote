@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s) {
+                let answer = "";
+
+                /* 내 1번째 방법
+                let word = a;
+                let wordMidLength = 1; //가운데 문자 길이는 1(문자 길이가 홀수면 1)아니면 2(문자 길이가 짝수면)라서 우선 1로 선언
+                let wordCroplength = 0; //crop할 길이는 아직 모르기 때문에 0으로 숫자라고 선언
+
+                if(a.length % 2 === 0) {
+                    //매개변수로 받은 문자가 짝수면 가운데 문자 길이 2로 변경
+                    wordMidLength = 2;
+                }
+
+                //crop할 길이 = 문자 전체 길이 - 남길 가운데 길이 / 2(앞뒤로 자르기 때문)
+                wordCroplength = (word.length - wordMidLength) / 2; 
+
+
+                let wordArray = [];
+                for(let i=0; i<word.length; i++) {
+                    wordArray[i] = word[i];
+                }
+
+                wordArray.splice(0, wordCroplength); 
+                wordArray.splice(-wordCroplength); 
+                for(let i=0; i<wordArray.length; i++) {
+                    answer += wordArray[i];
+                }
+                return answer;
+                */
+
+
+                /* 2번째로 생각난 방법
+                let word = a; === "study"
+                word = word.split(word.slice(0, wordCroplength))[1];
+                // index 1인 이유 : word[0] = "" / word[1] = "udy"임
+
+                word = word.split(word.slice(-wordCroplength))[0];
+                // index 0인 이유 word[0] = "u", word[1] = ""임
+
+                answer = word;
+                */
+
+
+                /* 선생님 풀이!!!!!! substring, substr 사용 */
+                let mid = Math.floor(s.length/2); //floor는 무조건 내림 5 / 2 => 2.5인데 내림해서 2가 됨
+                answer = (s.length%2 === 1) ? s.substring(mid, mid+1) : s.substring(mid-1, mid+1);
+                return answer;
+
+            }
+            console.log(solution("aaabbb"));
+        </script>
+    </body>
+</html>

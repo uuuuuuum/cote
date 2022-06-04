@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(a) {
+                let answer = "NO";
+
+                /*
+                내 풀이
+                let onlyString = a.replace(/[0-9 ]/g,"");
+                onlyString = onlyString.replace(/[\{\}\[\]\/?.,;:|\)*~`!^\-+<>@\#$%&\\\=\(\'\"]/gi, "");
+                onlyString = onlyString.toUpperCase();
+                */
+
+                // 썜풀이
+                a = a.toLowerCase().replace(/[^a-z]/g,"");
+                let reverse = a.split('').reverse().join('');
+
+                if(a === reverse) answer = "YES";
+                return answer;
+            }
+            let a = "found7, time: study; Yduts; emit, 7Dnuof";
+            console.log(solution(a));
+        </script>
+    </body>
+</html>

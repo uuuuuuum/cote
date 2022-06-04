@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s, t) {
+                // 못 풀었음... 선생님이랑 같이 하는 듕ㅠ_ㅠ
+                let answer = [];
+                let str = s.split('');
+                let p = 0;
+
+                let answer1 = [];
+                let answer2 = [];
+                for(let j=0; j<str.length; j++) {
+                    if(str[j] === t) {
+                        p=0;
+                    } else {
+                        p++;
+                    }
+                    answer1.push(p);
+                };
+            
+                p = 0;
+                for(let i=str.length-1; i>0; i--) {
+                    if(str[i] === t) {
+                        p=0;
+                    } else {
+                        p++;
+                    }
+                    answer2.push(p);
+                };
+
+                return answer;
+            }
+
+            console.log(solution("teachermode", "e"));
+        </script>
+    </body>
+</html>

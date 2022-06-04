@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(N, arr) {
+                let answer = [];
+                let grade = 1;
+
+                //점수가 높은순 정렬한 배열
+                let gradeArr = [...arr];
+                gradeArr = gradeArr.sort(function(a, b)  {
+                    if(a > b) return -1;
+                    if(a === b) return 0;
+                    if(a < b) return 1;
+                });
+
+
+                let plusPoint = 1; //다음 등수로 넘어가기 위함
+                for(let i=0; i<gradeArr.length; i++) {
+                    //i가 0일때는 계산하지말고 i가 1일때부터,
+                    //이전 학생의 점수랑 똑같은지 확인, 같으면 plusPoint 증가만 시켜두는 용도
+                    if(i !== 0 && gradeArr[i] === gradeArr[i-1]) {
+                        plusPoint += 1;
+                    }
+                    
+                    //i가 0일때는 계산하지말고 i가 1일때부터,
+                    //이전 학생의 점수랑 똑같은지 확인, 다르면 증가했던 plusPoint를 grade에 더하고 plusPoint를 1로 초기화
+                    else if(i !== 0 && gradeArr[i] !== gradeArr[i-1]) {
+                        grade+=plusPoint;
+                        plusPoint = 1;
+                    }
+                    for(let j=0; j<gradeArr.length; j++) {
+                        if(gradeArr[i] === arr[j]) answer[j] = grade;
+                    }
+                }
+
+                return answer;
+            }
+            let arr = [87, 89, 87, 76, 76, 92, 100, 76, 100, 100]
+            console.log(solution(10, arr));
+        </script>
+    </body>
+</html>

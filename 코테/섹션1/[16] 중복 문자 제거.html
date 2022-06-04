@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(a) {
+                /* 내 풀이
+                let answer = "";
+                for(let i=0; i<a.length; i++) {
+                    //만약 answer에 a[i]의 문자가 포함되어 있지 않으면 추가, 포함되어있으면 추가하지 않음 
+                    if(!answer.includes(a[i])) answer += a[i]
+                }
+                return answer;
+                */
+
+                let answer = "";
+                for(let i=0; i<a.length; i++) {
+                    if(a.indexOf(a[i]) === i) {
+                        // 문자의 인덱스 번호가 실제 문자 본인의 index랑 같을 경우에만 문자를 추가하기
+                        answer += a[i];
+                    }
+                }
+                // console.log(s.indexOf('k')); 처음 인덱스만 반환 (0번)
+                // console.log(s.indexOf('k'), 1); 1번자리부터 찾아서 0번 말고 다음번째 인덱스를 반환
+                /* 선생님 풀이 indexOf 사용*/
+
+                return answer;
+            }
+            console.log(solution("ksekkset"));
+        </script>
+    </body>
+</html>

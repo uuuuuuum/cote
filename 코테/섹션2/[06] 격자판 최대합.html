@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(N, arr_0, arr_1, arr_2, arr_3, arr_4) {
+                let answer = 0;
+
+                //for문 돌리기 위해 빙고판 전부 합친 array 생성
+                let allArr = [arr_0, arr_1, arr_2, arr_3, arr_4];
+
+                //answer의 값을 구하기 전에, 행5가지, 열5가지, 대각선2가지의 총합을 배열에 담기
+                let answerArr = [];
+                let answerArridx = 0;
+
+                //행 
+                for(let i=0; i<N; i++) {
+                    answerArr[answerArridx] = allArr[i].reduce((a, b) => a + b)
+                    answerArridx++;
+                }
+
+                //열추가
+                let calc = 0;
+                for(let j=0; j<N; j++) {
+                    calc = 0;
+                    for(let k=0; k<N; k++) {
+                        calc += allArr[k][j]
+                    }
+                    answerArr[answerArridx] = calc;
+                    answerArridx++;
+                }
+
+                //대각선 추가
+                let calc2 = 0;
+                for(let i=0; i<N; i++) {
+                    if(i === 0) {
+                        for(let j=0; j<N; j++) {
+                            calc2 += allArr[j][j];
+                        }
+                        answerArr[answerArridx] = calc2;
+                        answerArridx++;
+                    }
+                }
+
+                //대각선 추가2
+                let calc3 = 0;
+                for(let i=0; i<N; i++) {
+                    if(i === N-1) {
+                        for(let j=N-1; j>=0; j--) {
+                            calc3 += allArr[j][j];
+                        }
+                        answerArr[answerArridx] = calc3;
+                        answerArridx++;
+                    }
+                }
+
+                answer = Number.MIN_SAFE_INTEGER;
+                for(let i=0; i<answerArr.length; i++) {
+                    if(answerArr[i] > answer) answer = answerArr[i];
+                }
+
+                return answer;
+            }
+            let arr_0 = [10, 13, 10, 12, 15]
+            let arr_1 = [12, 39, 30, 23, 11]
+            let arr_2 = [11, 25, 50, 53, 15]
+            let arr_3 = [19, 27, 29, 37, 27]
+            let arr_4 = [19, 13, 30, 13, 19]
+            console.log(solution(5, arr_0, arr_1, arr_2, arr_3, arr_4));
+        </script>
+    </body>
+</html>

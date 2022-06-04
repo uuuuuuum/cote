@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr) {
+                let answer = "";
+
+                // 맨 처음 answer은 "" 빈칸으로 가장 짧기 떄문에, answer의 값이 arr[0]으로 무조건 바뀐다.
+                // 그 다음부터는 answer과 arr[i]를 비교해서 더 긴거를 넣는다.
+                for(let i=0; i<arr.length; i++) {
+                    if(arr[i].length > answer.length) answer = arr[i]
+                }
+                return answer;
+            }
+            let arr = ["teacher", "time", "student", "beautiful", "good"];
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>

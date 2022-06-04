@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr) {
+                let answer = [];
+                let answerIdx = 0;
+                for(i=0; i<arr.length; i++) {
+                    if(arr.indexOf(arr[i]) === i) {
+                        answer[answerIdx] = arr[i];
+                        answerIdx++;
+                    }
+                } 
+
+                return answer;
+            }
+            let arr = ["good", "time", "good", "time", "student"]
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>

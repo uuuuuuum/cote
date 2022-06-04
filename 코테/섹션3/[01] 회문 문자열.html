@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(a) {
+                let answer = "NO";
+
+                // '단 회문을 검사할 때 대소문자를 구분하지 않습니다'기 때문에
+                // 대소문자 대문자로 통일 
+                a = a.toUpperCase();
+            
+                //reverse는 배열을 뒤집는거라 빈문자로 쪼개고 돌려서 다시 join
+                let reverse = a.split('').reverse().join('');
+                if(a === reverse) answer = "YES"; //a랑 reverse가 같으면 YES 아니면 처음에 선언한 NO 그대로
+                return answer;
+            }
+            console.log(solution("gooG"));
+        </script>
+    </body>
+</html>

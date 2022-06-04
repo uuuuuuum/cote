@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            /*
+            
+            */
+            function solution(dwarfHeight) {
+                let answer = dwarfHeight;
+                let sum = dwarfHeight.reduce((a, b) => a+b, 0);
+                console.log(sum);
+
+                for(let i=0; i<dwarfHeight.length; i++) {
+                    for(j=i+1; j<dwarfHeight.length; j++) {
+                        if(sum - (dwarfHeight[i] + dwarfHeight[j]) === 100) {
+                            dwarfHeight.splice(j, 1);
+                            dwarfHeight.splice(i, 1);
+                        }
+                    }
+                }
+
+
+                /* 내 풀이
+                
+                let rest = 0;
+                for(let i=0; i<dwarfHeight.length; i++) {
+                    rest = rest + dwarfHeight[i]
+                }
+                rest = rest - 100;
+
+                거짓말쟁이 찾기
+                i는 0부터 dwarfHeight array의 length-1까지,
+                j는 i+1(i가 0이면 1, 3이면 4)부터 dwarfHeight array의 length-1까지 
+                => 이유는 j가 무조건 0부터시작하게 되면 i가 1일때 j의 처음은 0인데
+                    i가 0일때 j를 1로 두고 이미 계산을 했음
+                => 계산의 중복이 발생
+                
+                let liar = []
+                let liarIdx = 0;
+                for(let i=0; i<dwarfHeight.length; i++) {
+                    for(j=i+1; j<dwarfHeight.length; j++) {
+                        if(rest === dwarfHeight[i] + dwarfHeight[j]) {
+                            console.log(i, j)
+                            liar[liarIdx] = dwarfHeight[i]
+                            liar[liarIdx + 1] = dwarfHeight[j]
+                            liarIdx = liarIdx + 2;
+                        }
+                    }
+                }
+
+                let answerIdx = 0;
+                for(let i=0; i<dwarfHeight.length; i++) {
+                    if(dwarfHeight[i] !== liar[0] && dwarfHeight[i] !== liar[1]) {
+                        answer[answerIdx] = dwarfHeight[i];
+                        answerIdx++;
+                    };
+                }
+                */
+
+                return answer;
+            }
+
+            let dwarfHeight = [20, 7, 23, 19, 10, 15, 25, 8, 13];
+            console.log(solution(dwarfHeight));
+        </script>
+    </body>
+</html>

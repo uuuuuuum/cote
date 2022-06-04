@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            /*
+            
+            */
+            function solution(a) {
+                // 썜풀이 1번
+                /*
+                    let answer = ""
+                    for(let x of a) {
+                        if(x === "A") answer += "#";
+                        else answer += x;
+                    }
+                */
+
+                //쌤풀이 2번
+                let answer = a;
+                answer = a.replace(/A/g, "#");
+                
+                // let answer = a;
+                // answer = answer.replace(/A/gi, "#");
+                return answer;
+            }
+            console.log(solution("BANANA"));
+        </script>
+    </body>
+</html>

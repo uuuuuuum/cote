@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr) {
+                let answer = 0;
+                //상하좌우를 봐야하기때문에 dx, dy라는 변수를 만들어서 방향을 나타내 줄것임
+                let dx = [-1, 0, 1, 0] //행
+                let dy = [0, 1, 0, -1] //열
+
+                // 나 자신이 [2][2]면 
+                let n = arr.length;
+                for(let i=0; i<n; i++) {
+                    //i=행
+                    for(let j=0; j<n; j++) {
+                        //j=열
+
+                        let flag=1; 
+                        //flag를 1로 두고 if문이 참일경우 봉우리가 아닌 것이므로 flag를 0으로 바꿔버리고 브레이크로 포문을 빠져나간다.
+                        //flag가 1이라면(ture라면) answer을 증가시킨다.
+
+                        for(let k=0; k<dx.length; k++) {
+                            //k는 좌표 계산할?for문?
+                            /*
+                                //행좌표 i가 행 dx[0],dx[1],dx[2],dx[3]
+                                //열좌표 j가 열 dy[0],dy[1],dy[2],dy[3]
+
+                                //0(i) + dx[0] = -1    //0(j) + dy[0] = 0   nx가 -1이라 if안들어감
+                                //0(i) + dx[1] = 0     //0(j) + dy[1] = 1   arr[0][1]이 arr[0][0]보다 크거나 같다. 거짓이라 if안들어감
+                                //0(i) + dx[2] = 1     //0(j) + dy[2] = 0   arr[1][0]이 arr[0][0]보다 크거나 같다. 거짓이라 if안들어감
+                                //0(i) + dx[3] = 0     //0(j) + dy[3] = -1  ny가 -1이라 if안들어감 
+                                //=>flag=1로 그대로 answer++됨
+                            */
+                            let nx=i+dx[k]; 
+                            let ny=j+dy[k]; 
+
+                            if(nx>=0 && nx<n && ny>=0 && ny<n && arr[nx][ny] >= arr[i][j]) {
+                                flag=0;
+                                break;
+                            }
+                        }
+                        if(flag) answer++;
+                    } 
+                }
+                return answer;
+            }
+            let arr = [
+                [5, 3, 7, 2, 3],
+                [3, 7, 1, 6, 1],
+                [7, 2, 5, 3, 4],
+                [4, 3, 6, 4, 1],
+                [8, 7, 3, 5, 2]
+            ]
+            
+            
+            
+            
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>

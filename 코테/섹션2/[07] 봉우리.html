@@ -1,0 +1,59 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(N, arr_0, arr_1, arr_2, arr_3, arr_4) {
+                let answer = 0;
+
+                //봉우리를 구할 지도격자판 배열 그리기
+                let corner = [0, 0, 0, 0, 0, 0, 0]
+                let arr = [
+                    corner,
+                    [0, ...arr_0, 0],
+                    [0, ...arr_1, 0],
+                    [0, ...arr_2, 0],
+                    [0, ...arr_3, 0],
+                    [0, ...arr_4, 0],
+                    corner
+                ];
+
+
+             
+                // arr[1][1] => arr[0][1] 상, arr[2][1] 하, arr[1][0] 좌, arr[1][2] 우
+                // 코너는 조건에는 포함될 수 있지만 계산이 되는 대상은 아니기 때문에,
+                // i=1에서 시작해서 5까지 for문
+                for(let i=1; i<=N; i++) {
+                    for(let j=1; j<=N; j++) {
+                        if(arr[i][j] > arr[i-1][j]) {
+                            //"상"보다 크다
+                            if(arr[i][j] > arr[i+1][j]) {
+                                //"하"보다 크다
+
+                                if(arr[i][j] > arr[i][j-1]) {
+                                    //"좌"보다 크다
+
+                                    if(arr[i][j] > arr[i][j+1]) {
+                                        //"우"보다 크다
+                                        //"여기까지 와야 상,하,좌,우보다 크다"
+                                        answer +=1;
+                                    }
+                                }
+                            }
+                        } 
+                    }
+                }
+
+                return answer;
+            }
+            let arr_0 = [5, 3, 7, 2, 3]
+            let arr_1 = [3, 7, 1, 6, 1]
+            let arr_2 = [7, 2, 5, 3, 4]
+            let arr_3 = [4, 3, 6, 4, 1]
+            let arr_4 = [8, 7, 3, 5, 2]
+            console.log(solution(5, arr_0, arr_1, arr_2, arr_3, arr_4));
+        </script>
+    </body>
+</html>
