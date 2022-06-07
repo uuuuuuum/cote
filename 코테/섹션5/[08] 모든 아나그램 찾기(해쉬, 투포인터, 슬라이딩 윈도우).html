@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>[08] 모든 아나그램 찾기(해쉬, 투포인터, 슬라이딩 윈도우)</title>
+    </head>
+    <body>
+        <script>
+            function solution(str, T) {
+                let answer = 0;
+                
+                for(let i=0; i<str.length; i++) {
+                    //num은 0에서부터 계속 증가 T의 문자열 개수가 3이라 0,1,2 / 1,2,3 / 2,3,4 .... 이렇게 될 것임
+                    let num = i;
+
+                    //string은 시작할 때 계속 초기화 됨
+                    let string = "";
+
+
+                    //T의 문자열 만큼 str의 문자를 잘라서 string을 생성해 줄 것임
+                    for(let j=0; j<T.length; j++) {
+                        string += str.split('')[num];
+                        num++;
+                    }
+
+                    //T의 문자열을 내림차순으로 정렬하고, 생성된 string도 내림차순으로 정렬했을 때
+                    //같다면 ANSWER에 +1
+                    if(T.split('').sort().join('') === string.split('').sort().join('')) answer++;
+                }
+
+                return answer;
+            }
+            let str = "bacaAacba";
+            console.log(solution(str, "abc"));
+        </script>
+    </body>
+</html>

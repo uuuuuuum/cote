@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>[03] 연속 부분수열 1</title>
+    </head>
+    <body>
+        <script>
+            function solution(N, M, arr) {
+                let answer = 0;
+                /*
+                    현재 M = 6이다
+                    arr를 0번째부터 끝까지 더 할 건데, 6보다 작으면 다음번째를 또 더하고
+                    6이면 answer을 플러스하고
+                */
+
+               
+               for(let i=0; i<N; i++) {
+                   let calc = arr[i];
+                   let num = i+1;
+                    console.log("시작", calc, i)
+
+                    //num이 N과 같거나 크다면 arr[num]이 없기 때문에 N보다 작을 때만
+                    while(calc < M && num<N) {
+                        calc += arr[num]
+                        if(calc === M) answer ++;
+                        else if(calc > M) break;
+                        num++;
+                    }
+                }
+                return answer;
+
+            }
+            let arr = [1, 2, 1, 3, 1, 1, 1, 2]
+            console.log(solution(8, 6, arr));
+        </script>
+    </body>
+</html>

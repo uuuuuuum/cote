@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>[06] 학급 회장(해쉬)</title>
+    </head>
+    <body>
+        <script>
+            function solution(N, str) {
+                let answer = "";
+
+                //후보골라내기 내고 순서대로 정렬
+                let strN = Array.from([...new Set(str)]).sort();
+                let candidateOb = []
+
+                //후보 오브젝트
+                strN.map(a => {
+                    candidateOb.push({
+                        name: a,
+                        vote: 0,
+                    })
+                });
+
+                str.split('').filter(a => {
+                    candidateOb.find(b => {
+                        if(a === b.name) b.vote++;
+                    })
+                });
+
+                answer = candidateOb.reduce((a, b) => {
+                    if(a.vote > b.vote) return a;
+                    else return b;
+                }).name;
+
+                return answer;
+            }
+            let str = "BACBACCACCBDEDE"
+            console.log(solution(15, str));
+        </script>
+    </body>
+</html>

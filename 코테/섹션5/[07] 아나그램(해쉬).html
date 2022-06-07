@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>[07]아나그램(해쉬)</title>
+    </head>
+    <body>
+        <script>
+            function solution(str1, str2) {
+                let answer = "";
+
+                //몇번 찍혔는지 정리할 오브젝트를 생성하기 위해 문자열의 중복을 제거하고 내림차순으로 정리한다.
+                let str1N = Array.from([...new Set(str1)]).sort();
+                let str2N = Array.from([...new Set(str2)]).sort();
+
+                //정리한 배열로 문자열이 무엇인지, 몇번 찍혔는지에 대한 오브젝트를 생성한다;
+                let str1_obe = str1N.map(a => {
+                    return {
+                        al: a,
+                        num: 0,
+                    }
+                });
+                let str2_obe = str2N.map(a => {
+                    return {
+                        al: a,
+                        num: 0,
+                    }
+                });
+                str1.split('').filter(a => {
+                    str1_obe.find(b => {
+                        if(a === b.al) b.num++;
+                    });
+                });
+                str2.split('').filter(a => {
+                    str2_obe.find(b => {
+                        if(a === b.al) b.num++;
+                    });
+                });
+
+                for(let i=0; i<str1_obe.length; i++) {
+                    if(str1_obe[i].al === str2_obe[i].al && str1_obe[i].num === str2_obe[i].num) {
+                        if(i===str1_obe.length-1) answer = "YES";
+                    } else {
+                        answer = "NO";
+                        break;
+                    }
+                }
+                return answer;
+            }
+            let str1 = "abaCC"
+            let str2 = "Caaab"
+            console.log(solution(str1, str2));
+        </script>
+    </body>
+</html>
