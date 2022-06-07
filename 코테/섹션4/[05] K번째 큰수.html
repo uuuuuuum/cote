@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(N, K, arr) {
+                let answer = 0;
+                let num = 0;
+                let numArr = [];
+                let idx = 0;
+                for(let i=0; i<N; i++) {
+                    num = 0;
+
+                    for(let j=0; j<N; j++) {
+                        numArr[idx] = arr[j];
+                        for (let k=0; k<3; k++) {
+                            if(num === j) num++;
+                            else if(num === N) num = 0;
+                            
+                            numArr[idx] += arr[num];
+                            num++;
+                        }
+                        idx++;
+                    }
+                }
+                console.log(numArr.sort((a, b) => {
+                    if(a > b) return -1
+                    if (a === b) return 0
+                    if(b > a) return 1
+                }));
+                console.log(numArr);
+                return answer;
+            }
+            let arr = [13, 15, 34, 23, 45, 65, 33, 11, 26, 42]
+            console.log(solution(10, 3, arr));
+
+            
+        </script>
+    </body>
+</html>

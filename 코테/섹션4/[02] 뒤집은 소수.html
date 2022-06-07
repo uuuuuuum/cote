@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n, arr) {
+                let answer = [];
+                for(let i=0; i<arr.length; i++) {
+                    arr[i] = Number(String(arr[i]).split('').reverse().join(''));
+                }
+                
+                for(let i=0; i<arr.length; i++) {
+                    isPrime(arr[i]) ? answer.push(arr[i]) : null
+                }
+
+                return answer;
+            }
+            let arr = [32, 55, 62, 20, 250, 370, 200, 30, 100]
+            console.log(solution(9, arr));
+
+            function isPrime(num) {
+                // 소수는 1과 자기 자신만으로만 나누어 떨어지는 수 임으로
+                // num > i
+                for(let i = 2; num > i; i++) {
+                    console.log(num, i);
+                    if(num % i === 0) { //이 부분에서 num이  다른 수로 나눠떨어진다면 소수가 아님
+                        return false;
+                    }
+                }
+                // 소수는 1보다 큰 정수임으로
+                // 1보다 작으면 false를 리턴한다
+                return num > 1;
+            }
+            
+        </script>
+    </body>
+</html>

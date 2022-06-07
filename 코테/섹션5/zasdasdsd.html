@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s) {
+                var answer = '';
+    
+                let arr = s.split(" ");
+                arr = arr.map(a => Number(a));
+                
+                arr = arr.sort((a, b) => {
+                    if(a > b) return 1
+                    if(a === b) return 0
+                    if(a < b) return -1
+                });
+
+                
+                answer += arr[0] + " " + arr[arr.length-1]
+                return answer;
+                
+                console.log(arr, "Asda")
+            }
+            
+
+            console.log(solution("-1 -2 -3 -4"));
+        </script>
+    </body>
+</html>

@@ -1,0 +1,106 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(student, meony, arr) {
+                let answer = 0;
+                //배송비는 할인에 포함 x / 상품 50% 할인권 1개 있음
+                
+                let expensiveItem = 0;
+                for(let i=0; i<arr.length; i++) {
+                    if(arr[i][0] > expensiveItem) expensiveItem = arr[i][0];
+                }
+                
+                //제일 비싼 아이템 찾아 상품가격만 50% 할인하기
+                arr.map((a, i) => {
+                    if(a[0] === expensiveItem) {
+                        console.log(i);
+                        arr[i][0] = arr[i][0] / 2
+                    }
+                });
+
+                let itemSum = [];
+                for(let i=0; i<arr.length; i++) {
+                    itemSum[i] = arr[i].reduce((a, b) => a + b);
+                }
+                
+                let itemCalc = [];
+                // for(let i=0; i<arr.length; i++) {
+                //     itemCalc[i] = itemSum[i]
+
+                //     for(let j=0; j<arr.length; j++) {
+                //         if(i != j) {
+                //             console.log(itemCalc[i], meony);
+                //             if(itemCalc[i] + itemSum[j] < meony) {
+                //                 itemCalc[i] += itemSum[j]
+                //             }
+                //         }
+                //     }
+                // }
+                // console.log(itemCalc);
+
+                    // 계산num을 따로 만들자 num은 0에서 시작하는데, num = i면 num을 i+1로 바꾸짜
+                    // num이 max면 num을 0으로 보냄 근데 0이 본인이면 +1..???
+                    
+                let itemCalc2 = [];
+                let idx = 0;
+                for(let i=0; i<itemSum.length; i++) {
+
+                    for(let j=0; j<itemSum.length; j++) {
+                        let num = j;
+                        itemCalc2[idx] = itemSum[j]
+
+                        for(let k=1; k<itemSum.length; k++) {
+                            if(num === j) num++;
+
+                            if(itemCalc2[idx] + itemSum[num] < meony) {
+                                itemCalc2[idx] += itemSum[num]
+                            } 
+                            num++;
+                            if(num === itemSum.length-1) num = 0;
+                        }
+                        idx++;
+                    }
+                }
+                console.log(itemCalc2);
+                return answer;
+            }
+            let arr = [
+                [6, 6],   
+                [2, 2],
+                [4, 3],
+                [4, 5],
+                [10, 3]
+            ]
+            console.log(solution(5, 28, arr));
+
+            /*
+            12 / 4 / 7 / 9 / 8
+
+                           i    계산num을 따로 만들자 num은 0에서 시작하는데, num = i면 num을 i+1로 바꾸짜
+                                num이 max면 num을 0으로 보냄 근데 0이 본인이면 +1..????
+
+            12+4+7+9+8  => 0 1 2 3 4
+            12+7+9+8+4  => 0 2 3 4 1
+            12+9+8+4+7  => 0 3 4 1 2
+            12+8+4+7+9  => 0 4 1 2 3
+
+            4+7+9+8+12 => 1 2 3 4 0
+            4+9+8+12+7 => 1 3 4 0 1
+            4+8+12+7+9 => 1 4 0 2 3
+            4+12+7+9+8 => 1 0 2 3 4
+
+            7+9+8+12+4 => 2 3 4 0 1
+            7+8+12+4+9 => 2 4 0 1 3
+            7+12+4+9+8 => 2 0 1 3 4
+            7+4+9+8+12 => 2 1 3 4 0
+
+            */
+            
+            
+        </script>
+    </body>
+</html>

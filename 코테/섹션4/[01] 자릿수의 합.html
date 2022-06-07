@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n, arr) {
+                let answer = 0;
+                let max = Number.MIN_SAFE_INTEGER;
+                let arrSum = []
+                for(let i=0; i<arr.length; i++) {
+                    console.log(String(arr[i]).split(''));
+                    arrSum[i] = String(arr[i]).split('');
+
+                    for(let j=0; j<arrSum[i].length; j++) {
+                        arrSum[i][j] = Number(arrSum[i][j]);
+                    }
+
+                    arrSum[i] = arrSum[i].reduce((a, b) => a + b);
+                    if(arrSum[i] > max) max = arrSum[i];
+                };
+                
+                arrSum.filter((n, i) => {
+                    if(n === max) {
+                        if(arr[i] > answer) answer = arr[i]
+                    };
+                });
+                return answer;
+            }
+            let arr = [128, 460, 603, 40, 521, 137, 123]
+            console.log(solution(7, arr));
+        </script>
+    </body>
+</html>

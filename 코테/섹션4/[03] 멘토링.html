@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n, m, arr) {
+                let answer = 0;
+                let student = [];
+                for(let i=0; i<n; i++) {
+                    student[i] = {
+                        student: i+1,
+                        grade: [],
+                        isAnswerTrue: []
+                    }
+                }     
+
+                for(let i=0; i<arr.length; i++) {
+                    for(let j=0; j<arr[i].length; j++) {
+                        for(let k=0; k<student.length; k++) {
+                            if(arr[i][j] === student[k].student) {
+                                student[k].grade[i] = j+1;
+                            }
+                        }
+                    }
+                }
+
+                // 스튜던트0,1,2,3 학생을 다 검사 할거다.
+                for(let i=0; i<student.length; i++) {
+                    //기본 true로 선언 해놓고 한번이라도 false가 나오면 break로 빠져나가기
+                    let isTrue = true;
+                    for(let j=0; j<student.length; j++) {
+                        for(let k=0; k<student[i].grade.length; k++) {
+                            //i랑 j가 같지 않을떄만, 자기 자신과 비교는 의미가없기떄문!!
+                            if(j !== i && student[i].grade[k] < student[j].grade[k]) {
+                                isTrue = true;
+                            }
+                            else {
+                                isTrue = false;
+                                break;
+                            }
+                        }
+
+                        if(isTrue) answer++;
+                    }
+                }
+
+                return answer;
+            }
+            let arr = [
+                [3, 4, 1, 2],
+                [4, 3, 2, 1],
+                [3, 1, 4, 2],
+            ]
+            console.log(solution(4, 3, arr));
+            
+        </script>
+    </body>
+</html>
