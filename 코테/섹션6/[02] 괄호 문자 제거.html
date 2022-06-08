@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr) {
+                let answer = "";
+                arr = arr.split('');
+
+                let arrSet = Array.from([...new Set(arr)]);
+                let arrObe = [];
+                
+                arrSet.map((a, i) => {
+                    arrObe.push({
+                        str: a,
+                        num: numCount(a, 0),
+                    });
+                });
+
+                
+                //a는 arrSet의 값으로, 중복을 제거해 괄호 "(", ")" 단 2개만 있다.
+                //b는 arr의 값으로 솔루션의 매개변수로 입력받은 모든 괄호를 가지고 있다.
+                //a랑 b를 비교해서 같은 경우에 n을 증가시킨다.
+                function numCount(a, n) {
+                    arr.filter(b => {
+                        if(a === b) {
+                            n += 1;
+                        }
+                    });
+                    return n;
+                }
+
+                if(arrObe[0].num === arrObe[1].num) answer = "YES";
+                else answer = "NO";
+
+                return answer;
+            }
+            let arr = "(()(()))(()";
+            console.log(solution(arr));
+            console.log(solution("(())()"));
+        </script>
+    </body>
+</html>
