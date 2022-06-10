@@ -8,7 +8,8 @@
             function solution(N, M, arr) {
                 let answer = 0;
 
-               for(let i=0; i<N; i++) {
+                /*
+                for(let i=0; i<N; i++) {
                     let calc = arr[i];
 
                     //arr[i]가 5이하면 바로 answer++
@@ -32,8 +33,37 @@
                         num++;
                     }
                 }
+                */
+               
+                
+                //2 Pointer 알고리즘
+                let lt = 0;
+                let rt = 0;
+                let calcNum = arr[lt];
+                while(lt<arr.length && rt<arr.length) {
+                    if(calcNum <= M) {
+                        answer += rt - lt + 1;
+                        rt++;
+                        calcNum += arr[rt];
+                    } else if(calcNum > M) {
+                        calcNum -= arr[lt];
+                        lt++;
+                    }
+                }
                 return answer;
 
+                /*
+                //선생님 코드
+                let lt = 0;
+                let sum = 0;
+                for(let rt=0; rt<arr.length; rt++) {
+                    sum += arr[rt];
+                    while(sum > M) {
+                        sum -= arr[lt++];
+                    } 
+                    answer += rt - lt + 1;
+                }
+                */
             }
             let arr = [1, 3, 1, 2, 3]
             console.log(solution(5, 5, arr));

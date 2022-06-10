@@ -5,9 +5,55 @@
     </head>
     <body>
         <script>
+            function comepareMaps(tHash, strHash) {
+                //size가 다르면 false
+                //=> a1 b1 c1 / a2 b1 이런식이기 때문!
+                if(tHash.size !== strHash.size) return false;
+                for(let [key, val] of tHash) {
+                    if(!strHash.has(key) || strHash.get(key) !== val) return false;
+                }
+                return true;
+            }
+
             function solution(str, T) {
                 let answer = 0;
                 
+                //해쉬, 투포인터, 슬라이딩 윈도우
+                let tHash = new Map();
+
+                //T 문자열 hash map 만들기
+                for(let x of T) {
+                    if(tHash.has(x)) {  
+                        tHash.set(x, tHash.get(x)+1);
+                    } else tHash.set(x, 1);
+                }
+
+                let strHash = new Map();
+
+                //슬라이딩 윈도우 0 1 시작
+                let len = T.length - 1;
+                for(let i=0; i<len; i++) {
+                    if(strHash.has(str[i])) strHash.set(str[i], strHash.get(str[i])+1);
+                    else strHash.set(str[i], 1);
+                }
+
+                //슬라이딩 윈도우
+                let lt = 0;
+                for(let rt=len; rt<str.length; rt++) {
+                    if(strHash.has(str[rt])) strHash.set(str[rt], strHash.get(str[rt])+1);
+                    else strHash.set(str[rt], 1);
+
+                    if(comepareMaps(tHash, strHash)) answer++;
+
+                    //함수 실행한 뒤 lt번째는 지우기
+                    strHash.set(str[lt], strHash.get(str[lt])-1);
+
+                    //지웠는데 value가 0이면 삭제시키기
+                    if(strHash.get(str[lt])===0) strHash.delete(str[lt]);
+                    lt++;
+                }
+        
+                /*
                 for(let i=0; i<str.length; i++) {
                     //num은 0에서부터 계속 증가 T의 문자열 개수가 3이라 0,1,2 / 1,2,3 / 2,3,4 .... 이렇게 될 것임
                     let num = i;
@@ -26,6 +72,7 @@
                     //같다면 ANSWER에 +1
                     if(T.split('').sort().join('') === string.split('').sort().join('')) answer++;
                 }
+                */
 
                 return answer;
             }

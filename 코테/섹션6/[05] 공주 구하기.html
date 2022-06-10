@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+
+            function solution(prince, bomb) {
+                let answer = 0;
+                let pri = 0;
+                let princeArr = [];
+                for(let i=1; i<=prince; i++) {
+                    princeArr.push(i);
+                }
+                answer = exceptPrice(pri, princeArr, bomb);
+                return answer;
+            }
+
+
+            function exceptPrice(pri, princeArr, bomb) {
+                //num은 왕자가 외치는 숫자
+                //pri는 외치는 왕자님
+                //pri는 제외된 놈 다음 번호부터 계속 시작
+                //num은 계쏙 1로 쵝화
+                let num = 1;
+                while(num <= bomb && princeArr.length > 1) {
+                    if(pri > princeArr.length-1) {
+                        pri = 0;
+                    }
+                    if(num === bomb) {
+                        
+                        if(princeArr.length === pri) {
+                            princeArr.splice(pri-princeArr.length, 1);
+                        } else {
+                            princeArr.splice(pri, 1);
+                        }
+
+                        exceptPrice(pri, princeArr, bomb);
+                        break;
+                    }
+                    pri++;
+                    num++;
+                }
+                if(princeArr.length === 1) {
+                    return princeArr[0];
+                }
+            }
+            console.log(solution(8, 3));
+        </script>
+    </body>
+</html>

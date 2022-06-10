@@ -8,6 +8,7 @@
             function solution(N, K, arr) {
                 let answer = 0;
 
+                /*
                 for(let i=0; i<N-K+1; i++) {
                     let a = 0;
                     let num = i;
@@ -19,6 +20,31 @@
                     
                     if(answer < a) answer = a;
                 }
+                */
+
+                //슬라이딩 윈도우 알고리즘
+                // let lt = 0;
+                // let rt = lt + K;
+                // while(rt < arr.length) {
+                //     let sum = 0;
+                //     for(let i=lt; i<rt; i++) {
+                //         sum += arr[i]
+                //     }
+                //     if(sum > answer) answer = sum;
+
+                //     lt++;
+                //     rt++;
+                // }
+                let sum = 0;
+                for(let i=0; i<K; i++) sum += arr[i]
+                answer = sum;
+
+                for(let i=K; i<arr.length; i++) {
+                    sum += arr[i] - arr[i-K];
+                    answer = Math.max(answer, sum);
+                }
+
+
                 return answer;
 
             }

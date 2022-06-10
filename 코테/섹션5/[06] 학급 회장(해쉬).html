@@ -8,6 +8,26 @@
             function solution(N, str) {
                 let answer = "";
 
+                //해쉬 사용
+                let sH = new Map();
+                for(let x of str) {
+                    if(sH.has(x)) {
+                        sH.set(x, sH.get(x) + 1)
+                    } else {
+                        sH.set(x, 1);
+                    }
+                }
+
+                let max = Number.MIN_SAFE_INTEGER;
+                for(let [key, val] of sH) {
+                    if(val > max) {
+                        max = val
+                        answer = key;
+                    }
+                }
+
+
+                /*
                 //후보골라내기 내고 순서대로 정렬
                 let strN = Array.from([...new Set(str)]).sort();
                 let candidateOb = []
@@ -30,6 +50,7 @@
                     if(a.vote > b.vote) return a;
                     else return b;
                 }).name;
+                */
 
                 return answer;
             }
