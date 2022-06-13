@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+
+
+            //Queue 자료 구조 방법으로 풀기
+            function solution(K, N) {
+                let answer = "YES";
+
+                //K를 배열로 만들고 새로운 배열에 같은게 있으면 푸쉬
+                //다 끝나고 문자의 순서가 같으면 yes 다르면 no
+                let requiredSub = K.split("");
+                let requiredSubN = [];
+                
+                for(let x of N) {
+                    for(let i=0; i<requiredSub.length; i++) {
+                        if(x === requiredSub[i]) {
+                            //새배열에 CBA중에 먼저 만나는 과목이 더해짐
+                            requiredSubN.push(requiredSub[i]);
+
+                            //더한거 빼주기 length로 break 체크
+                            requiredSub.splice(i, 1);
+                            break;
+                        }
+                    }
+                    if(!requiredSub.length) break;
+                }
+
+                requiredSubN = requiredSubN.join("");
+                if(K === requiredSubN) answer = "YES";
+                else answer = "NO";
+                return answer;
+            }
+
+            console.log(solution("CBA", "CADBGE"));
+            console.log(solution("CBA", "CBDAGE"));
+        </script>
+    </body>
+</html>
